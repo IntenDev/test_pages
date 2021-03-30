@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="banner-list grid-list">
+    {% for slide in data.blocks %}
+    {% if slide.link != "" %}
+    <a href="{{ slide.link }}"  data-block-id="{{ slide.id }}" class="banner-list__item editable-block" >
+        {% else %}
+        <div data-block-id="{{ slide.id }}" class="banner-list__item editable-block" >
+            {% endif %}
+            <div class="img-ratio img-ratio_cover banner-list__item-photo">
+                <div class="img-ratio__inner">
+                    {% assign image_title = slide.name | escape %}
+                    {% if slide.image %}
+                    <picture>
+                        <source media="(min-width:481px)" data-srcset="{{ slide.image | image_url: 700, format: 'webp' }}" type="image/webp" class="lazyload">
+
+                        <source media="(max-width:480px)" data-srcset="{{ slide.image | image_url: 500, format: 'webp', resizing_type: 'fit_width' }}" type="image/webp" class="lazyload">
+
+                        <img data-src="{{ slide.image | image_url: 700 }}" class="lazyload" alt="{{ image_title }}">
+                    </picture>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="banner-list__item-title">
+                {{ slide.name  | editable }}
+            </div>
+            {% if slide.link != "" %}</a>{% else %}</div>{% endif %}
+{% endfor %}
+</div>
+{% assign image_title = null %}
+
+</body>
+</html>
