@@ -25,5 +25,31 @@
         return false;
     };
 </script>*/
+<script>
+	let str = "apples, plums % and bananas\npears\noranges !applesauce"
+	solution(str, ["%","!"])
+	
+	function solution(input, markers) {
+  		let arrStr = input.split('\n');
+		let result = []
+		let temp;
+		for(let i = 0 ; i < arrStr.length; i++){
+			
+			for(let y = 0; y < markers.length; y++){ 
+				//console.log(arrStr[y].indexOf(markers[i]))
+				temp = arrStr[i].indexOf(markers[y])
+				//console.log(arrStr[i])
+				if(temp >= 0){
+					result.push(arrStr[i].substring(0, temp))
+				}else if(temp === -1){
+					result.push(arrStr[i])
+				}
+				
+			}
+			alert(result[i])
+		}
+		console.log(result)
+	};
+</script>
 </body>
-</html>
+</html>r
